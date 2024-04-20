@@ -65,6 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 iconPath: "assets/EndGameSlider_5_food.png", cb: addToSum),
             ScoreCounter(
                 iconPath: "assets/EndGameSlider_6_tucked.png", cb: addToSum),
+            ScoreCounter(
+                iconPath: "assets/EndGameSlider_7_nectar.png", cb: addToSum),
             SizedBox(
               width: 320.0,
               height: 80.0,
