@@ -15,6 +15,7 @@ class _DigitScrollAnimationState extends State<DigitScrollAnimation>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<int> _animation;
+  late Animation<Color?> _colorAnimation;
 
   @override
   void initState() {
@@ -28,6 +29,11 @@ class _DigitScrollAnimationState extends State<DigitScrollAnimation>
     _animation = IntTween(
       begin: 0,
       end: widget.value,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuint));
+
+    _colorAnimation = ColorTween(
+      begin: Colors.red,
+      end: Colors.lightGreen,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuint));
 
     _controller.forward();
@@ -48,7 +54,7 @@ class _DigitScrollAnimationState extends State<DigitScrollAnimation>
 
         return Text(
           _animation.value.toString(),
-          style: TextStyle(fontSize: fontSize, color: Colors.yellowAccent),
+          style: TextStyle(fontSize: fontSize, color: _colorAnimation.value),
         );
       },
     );
