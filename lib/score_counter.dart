@@ -25,7 +25,7 @@ class _ScoreCounterState extends State<ScoreCounter> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         InkWell(
           onTap: () {
@@ -61,9 +61,15 @@ class _ScoreCounterState extends State<ScoreCounter> {
             ),
           ),
         ),
-        Text(
-          '$value',
-          style: Theme.of(context).textTheme.displayLarge,
+        SizedBox(
+          width: 80.0,
+          height: 80.0,
+          child: Center(
+            child: Text(
+              '$value',
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+          ),
         ),
         SizedBox(
           width: 80.0,

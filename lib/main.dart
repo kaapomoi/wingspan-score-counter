@@ -1,4 +1,5 @@
 import 'score_counter.dart';
+import 'digit_scroll_animation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Padding(padding: EdgeInsets.all(16.0)),
+            const Padding(padding: EdgeInsets.all(12.0)),
             ScoreCounter(
                 iconPath: "assets/EndGameSlider_1_birds.png", cb: addToSum),
             ScoreCounter(
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: scoreRevealed
                     ? DigitScrollAnimation(
-                        value: sum, // Your three-digit variable here
+                        value: sum,
                         duration: const Duration(seconds: 5),
                       )
                     : Text(
@@ -91,61 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class DigitScrollAnimation extends StatefulWidget {
-  final int value;
-  final Duration duration;
-
-  const DigitScrollAnimation(
-      {super.key, required this.value, required this.duration});
-
-  @override
-  State<DigitScrollAnimation> createState() => _DigitScrollAnimationState();
-}
-
-class _DigitScrollAnimationState extends State<DigitScrollAnimation>
-    with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<int> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-
-    _animation = IntTween(
-      begin: 0,
-      end: widget.value,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuint));
-
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        final fontSize = 24.0 + (_animation.value / 3.0);
-
-        return Text(
-          _animation.value.toString(),
-          style: TextStyle(fontSize: fontSize),
-        );
-      },
     );
   }
 }
